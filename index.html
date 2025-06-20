@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bell Ringer</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to ensure full page coverage and centering */
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            background-color: #f0f4f8; /* Light gray background */
+            margin: 0;
+            padding: 20px; /* Add some padding for smaller screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem; /* Equivalent to p-10 */
+            background-color: #ffffff; /* White background for the card */
+            border-radius: 1.5rem; /* Equivalent to rounded-3xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Equivalent to shadow-xl */
+            max-width: 90%; /* Max width for responsiveness */
+            width: 400px; /* Fixed width for larger screens */
+            text-align: center;
+        }
+        /* Style for the button */
+        .ring-button {
+            background-image: linear-gradient(to right, #4CAF50, #8BC34A); /* Green gradient */
+            color: white;
+            font-size: 1.5rem; /* Equivalent to text-2xl */
+            font-weight: bold; /* Equivalent to font-bold */
+            padding: 1.5rem 3rem; /* Equivalent to px-12 py-6 */
+            border-radius: 9999px; /* Equivalent to rounded-full */
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .ring-button:hover {
+            transform: translateY(-3px); /* Slightly lift on hover */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .ring-button:active {
+            transform: translateY(0); /* Press down on click */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-6">Bell Ringer App</h1>
+        <!-- Button to trigger the sound -->
+        <button id="ringButton" class="ring-button">
+            RING
+        </button>
+
+        <!-- Audio element for the bell sound -->
+        <!-- The `src` should point to your MP3 file. -->
+        <!-- `preload="auto"` helps load the audio faster. -->
+        <!-- `id` is used to reference this element in JavaScript. -->
+        <audio id="bellSound" src="Bell.mp3" preload="auto"></audio>
+
+        <p class="text-sm text-gray-600 mt-6">
+            Ensure your MP3 file is named <code class="bg-gray-100 p-1 rounded">Bell.mp3</code> and is in the same directory as this HTML file.
+        </p>
+    </div>
+
+    <script>
+        // Get references to the button and the audio elements
+        const ringButton = document.getElementById('ringButton');
+        const bellSound = document.getElementById('bellSound');
+
+        // Add a click event listener to the button
+        ringButton.addEventListener('click', () => {
+            // Check if the audio is loaded and ready to play
+            if (bellSound.readyState >= 2) { // HTMLMediaElement.HAVE_CURRENT_DATA or higher
+                // Reset the audio to the beginning each time the button is clicked
+                bellSound.currentTime = 0;
+                // Play the audio
+                bellSound.play().catch(error => {
+                    // Catch and log any errors that occur during playback (e.g., user gesture policy)
+                    console.error("Error playing sound:", error);
+                    // Optionally, provide a user-friendly message or fallback if playback fails
+                    // For example, display a message box:
+                    // showMessageBox("Could not play sound. Please ensure your browser allows audio playback.", "Error");
+                });
+            } else {
+                console.warn("Audio not yet ready to play.");
+                // Optionally, provide a message if the audio isn't loaded yet
+                // showMessageBox("Audio is still loading. Please try again in a moment.", "Info");
+            }
+        });
+
+        // Optional: Add a simple message box function (instead of alert)
+        // This is a basic example; for a real app, you'd use a more robust modal library.
+        function showMessageBox(message, type = "Info") {
+            let messageBox = document.getElementById('messageBox');
+            if (!messageBox) {
+                messageBox = document.createElement('div');
+                messageBox.id = 'messageBox';
+                messageBox.className = 'fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50';
+                messageBox.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm mx-auto">
+                        <h2 class="text-xl font-bold mb-4">${type}</h2>
+                        <p class="text-gray-700 mb-6">${message}</p>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onclick="document.getElementById('messageBox').remove()">
+                            OK
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(messageBox);
+            } else {
+                messageBox.querySelector('h2').textContent = type;
+                messageBox.querySelector('p').textContent = message;
+                messageBox.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
