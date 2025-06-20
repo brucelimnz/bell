@@ -7,16 +7,20 @@
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Ensure html and body take full height */
+        html, body {
+            height: 100%; /* Make html and body take 100% of viewport height */
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
+            overflow: hidden; /* Prevent scrolling if content exceeds viewport */
+        }
         /* Custom styles to ensure full page coverage and centering */
         body {
             font-family: 'Inter', sans-serif;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensure it takes full viewport height */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
             background-color: #f0f4f8; /* Light gray background */
-            margin: 0;
-            padding: 20px; /* Add some padding for smaller screens */
             box-sizing: border-box; /* Include padding in element's total width and height */
         }
         .container {
@@ -30,6 +34,8 @@
             max-width: 90%; /* Max width for responsiveness */
             width: 400px; /* Fixed width for larger screens */
             text-align: center;
+            /* Added margin for breathing room on smaller screens, while maintaining centering */
+            margin: 20px;
         }
         /* Style for the button */
         .ring-button {
@@ -56,7 +62,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Changed the heading text to "Cow Bell" -->
         <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-6">Cow Bell</h1>
         <!-- Button to trigger the sound -->
         <button id="ringButton" class="ring-button">
@@ -68,8 +73,6 @@
         <!-- `preload="auto"` helps load the audio faster. -->
         <!-- `id` is used to reference this element in JavaScript. -->
         <audio id="bellSound" src="Bell.mp3" preload="auto"></audio>
-
-        <!-- Removed the instructional paragraph from here -->
     </div>
 
     <script>
