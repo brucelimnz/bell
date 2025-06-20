@@ -20,7 +20,14 @@
             display: flex;
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
-            background-color: #f0f4f8; /* Light gray background */
+            /* --- Background Image Styles Start --- */
+            background-color: #f0f4f8; /* Fallback background color if image fails to load */
+            background-image: url('Grass.jpg'); /* Corrected: Added .jpg extension */
+            background-size: cover; /* Cover the entire background area */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-attachment: fixed; /* Keep the image fixed when scrolling (though we have overflow:hidden) */
+            /* --- Background Image Styles End --- */
             box-sizing: border-box; /* Include padding in element's total width and height */
         }
         .container {
@@ -34,8 +41,7 @@
             max-width: 90%; /* Max width for responsiveness */
             width: 400px; /* Fixed width for larger screens */
             text-align: center;
-            /* Added margin for breathing room on smaller screens, while maintaining centering */
-            margin: 20px;
+            margin: 20px; /* Added margin for breathing room on smaller screens, while maintaining centering */
         }
         /* Style for the button */
         .ring-button {
@@ -128,4 +134,3 @@
     </script>
 </body>
 </html>
-
