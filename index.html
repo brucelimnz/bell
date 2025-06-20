@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bell Ringer</title>
+    <title>Cow Bell</title>
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -56,7 +56,8 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-6">Bell Ringer App</h1>
+        <!-- Changed the heading text to "Cow Bell" -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-6">Cow Bell</h1>
         <!-- Button to trigger the sound -->
         <button id="ringButton" class="ring-button">
             RING
@@ -68,9 +69,7 @@
         <!-- `id` is used to reference this element in JavaScript. -->
         <audio id="bellSound" src="Bell.mp3" preload="auto"></audio>
 
-        <p class="text-sm text-gray-600 mt-6">
-            Ensure your MP3 file is named <code class="bg-gray-100 p-1 rounded">Bell.mp3</code> and is in the same directory as this HTML file.
-        </p>
+        <!-- Removed the instructional paragraph from here -->
     </div>
 
     <script>
@@ -126,3 +125,4 @@
     </script>
 </body>
 </html>
+
